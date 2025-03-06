@@ -33,11 +33,11 @@ class LyricPlayer {
 
         try {
             // 加载歌曲配置
-            const configResponse = await fetch(`/songs/${songId}/config.json`);
+            const configResponse = await fetch(`/lyric-site/songs/${songId}/config.json`);
             const config = await configResponse.json();
 
             // 加载元数据
-            const metadataResponse = await fetch(`/songs/${songId}/metadata.json`);
+            const metadataResponse = await fetch(`/lyric-site/songs/${songId}/metadata.json`);
             const metadata = await metadataResponse.json();
 
             // 设置页面标题和歌手信息
@@ -71,7 +71,7 @@ class LyricPlayer {
 
             // 加载翻译（如果存在）
             try {
-                const translationResponse = await fetch(`/songs/${songId}/translations/zh-CN.json`);
+                const translationResponse = await fetch(`/lyric-site/songs/${songId}/translations/zh-CN.json`);
                 const translations = await translationResponse.json();
                 this.lyrics.forEach((lyric, index) => {
                     lyric.translation = translations[index];

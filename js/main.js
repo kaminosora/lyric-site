@@ -30,7 +30,7 @@ class LyricSearch {
     async init() {
         try {
             debug('开始加载统一元数据');
-            const songsResponse = await fetch('/config/songs.json');
+            const songsResponse = await fetch('/lyric-site/config/songs.json');
             const songsData = await songsResponse.json();
             this.songs = songsData;
 
@@ -74,7 +74,7 @@ class LyricSearch {
         const existingSongs = new Set();
 
         // 先遍历songs文件夹，收集所有存在的歌曲ID
-        const songsResponse = await fetch('/config/songs.json');
+        const songsResponse = await fetch('/lyric-site/config/songs.json');
         const songsData = await songsResponse.json();
         for (const song of songsData) {
             existingSongs.add(song.id);
@@ -83,7 +83,7 @@ class LyricSearch {
         // 验证元数据
         for (const song of this.songs) {
             try {
-                const metadataResponse = await fetch(`songs/${song.id}/metadata.json`);
+                const metadataResponse = await fetch(`/lyric-site/songs/${song.id}/metadata.json`);
                 const metadata = await metadataResponse.json();
 
                 // 验证元数据
@@ -131,7 +131,7 @@ class LyricSearch {
     
         while (true) {
             try {
-                const metadataResponse = await fetch(`songs/${id}/metadata.json`);
+                const metadataResponse = await fetch(`/lyric-site/songs/${id}/metadata.json`);
                 if (!metadataResponse.ok) {
                     // 如果返回状态不是200，说明文件夹不存在，停止检查
                     break;
