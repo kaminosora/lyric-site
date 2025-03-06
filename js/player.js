@@ -51,7 +51,7 @@ class LyricPlayer {
             this.applyStyles(config);
 
             // 加载歌词
-            this.lyrics = await window.lyricParser.parse(`/songs/${songId}/lyrics.${config.lyrics_format}`);
+            this.lyrics = await window.lyricParser.parse(`/lyric-site/songs/${songId}/lyrics.${config.lyrics_format}`);
 
             // 检查是否有注音内容
             const hasFurigana = this.lyrics.some(lyric => lyric.furigana);
