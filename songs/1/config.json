@@ -1,0 +1,45 @@
+{
+    "lyrics_format": "lrc",
+    "style": {
+        "fonts": {
+            "default": "Noto Sans JP"
+        },
+        "colors": {
+            "base": "#333",
+            "active": "#e74c3c"
+        },
+        "effects": {
+            "charByChar": true,
+            "defaultEffect": {
+                "type": "cycle",
+                "duration": "2s",
+                "timing": "ease",
+                "normalColors": ["#f1c40f", "#9b59b6", "#3498db"],
+                "activeColors": ["#e74c3c", "#2ecc71", "#8e44ad"],
+                "glow": {
+                    "enabled": true,
+                    "color": "rgba(241, 196, 15, 0.6)",
+                    "radius": "10px",
+                    "intensity": 1.2
+                }
+            },
+            "charEffects": {
+                "0-0": { 
+                    "type": "wave",
+                    "direction": "right",
+                    "duration": "3s",
+                    "timing": "linear",
+                    "normalColors": ["#f1c40f", "#9b59b6", "#3498db"],
+                    "activeColors": ["#e74c3c", "#2ecc71", "#8e44ad"]
+                },
+                "0-1": {
+                    "type": "flow",
+                    "duration": "4s",
+                    "timing": "ease-in-out",
+                    "normalColors": ["#2ecc71", "#e67e22", "#8e44ad"],
+                    "activeColors": ["#e74c3c", "#f1c40f", "#3498db"]
+                }
+            }
+        }
+    }
+} 

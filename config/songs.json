@@ -1,0 +1,104 @@
+[
+    {
+        "name": "天空中闪烁的星星（虚拟测试歌曲）",
+        "nameReading": "tiankongzhongshanshuodexingxing",
+        "artist": "SARD UNDERGROUND",
+        "artistReading": "sard underground",
+        "language": "jp",
+        "album": "ZETTAI",
+        "release_date": "2021-03-24",
+        "lyricist": "米津玄师",
+        "composer": "米津玄师",
+        "arranger": "SARD UNDERGROUND",
+        "duration": "4:32",
+        "genre": [
+            "J-Pop",
+            "Rock"
+        ],
+        "label": "EMI Records",
+        "description": "SARD UNDERGROUND演唱的一首充满希望的摇滚歌曲。",
+        "tags": [
+            "摇滚",
+            "治愈",
+            "希望"
+        ],
+        "id": "1"
+    },
+    {
+        "name": "春日（虚拟测试歌曲）",
+        "nameReading": "chunri",
+        "artist": "柳爽",
+        "artistReading": "liushuang",
+        "language": "zh",
+        "album": "四季",
+        "release_date": "2023-03-21",
+        "lyricist": "柳爽",
+        "composer": "柳爽",
+        "arranger": "王明",
+        "duration": "4:15",
+        "genre": [
+            "华语流行",
+            "民谣"
+        ],
+        "label": "独立音乐人",
+        "description": "一首描绘春天美好景色的温暖民谣，展现了对生活的热爱与期待。",
+        "tags": [
+            "民谣",
+            "春天",
+            "温暖",
+            "治愈"
+        ],
+        "id": "2"
+    },
+    {
+        "name": "BOW AND ARROW",
+        "nameReading": "bowandarrow",
+        "artist": "米津玄师",
+        "artistReading": "yonezukenshi",
+        "language": "jp",
+        "album": "BOW AND ARROW",
+        "release_date": "2025-01-27",
+        "lyricist": "米津玄师",
+        "composer": "米津玄师",
+        "arranger": "米津玄师",
+        "duration": "2:55",
+        "genre": [
+            "J-Pop",
+            "Alternative"
+        ],
+        "label": "",
+        "description": "米津玄师为为TV动画《金牌得主》创作的片头曲，单曲封面上的插图是由米津玄师亲自绘制的，描绘了该电视动画的主角结束祈滑冰的身姿。",
+        "tags": [
+            "流行",
+            "摇滚",
+            "励志",
+            "青春"
+        ],
+        "id": "3"
+    },
+    {
+        "name": "ストロボメモリー",
+        "nameReading": "sutorobomemori-",
+        "artist": "内田真礼",
+        "artistReading": "naitamakoto",
+        "language": "jp",
+        "album": "ストロボメモリー",
+        "release_date": "2021-04-03",
+        "lyricist": "RIRIKO",
+        "composer": "RIRIKO",
+        "arranger": "RIRIKO",
+        "duration": "4:43",
+        "genre": [
+            "J-Pop"
+        ],
+        "label": "TRIGGER",
+        "description": "《闪光灯般的回忆》（ストロボメモリー）是动画《SSSS.DYNAZENON》的片尾曲，由内田真礼演唱，歌曲收录于同名专辑《ストロボメモリー》中。",
+        "tags": [
+            "流行",
+            "摇滚",
+            "爱情",
+            "青春"
+        ],
+        "id": "4"
+    }
+]

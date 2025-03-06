@@ -1,0 +1,460 @@
+/* 全局样式变量 */
+:root {
+    /* 颜色 */
+    --primary-color: #3490dc;
+    --secondary-color: #6f8278;
+    --text-color: #2d3748;
+    --background-color: #f7fafc;
+    --translation-color: #666;
+    --active-color: #e74c3c;
+    --loading-color: #718096;
+
+    /* 特效颜色 */
+    --effect-normal-1: #f1c40f;
+    --effect-normal-2: #9b59b6;
+    --effect-normal-3: #3498db;
+    --effect-active-1: #e74c3c;
+    --effect-active-2: #2ecc71;
+    --effect-active-3: #8e44ad;
+
+    /* 发光和阴影效果 */
+    --glow-color: rgba(241, 196, 15, 0.6);
+    --glow-radius: 10px;
+    --glow-intensity: 1;
+    --shadow-color: rgba(0, 0, 0, 0.3);
+    --shadow-x: 2px;
+    --shadow-y: 2px;
+    --shadow-blur: 4px;
+
+    /* 字体 */
+    --font-main: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    --font-lyrics: var(--font-main);
+    --font-translation: var(--font-main);
+    --font-furigana: var(--font-main);
+
+    /* 字体大小 */
+    --font-size-lyrics: 1rem;
+    --font-size-translation: 0.9rem;
+    --font-size-furigana: 0.7em;
+
+    /* 行高和间距 */
+    --line-height-lyrics: 1.6;
+    --line-height-translation: 1.4;
+    --gap-lyrics: 3rem;
+    --gap-lines: 0.5rem;
+
+    /* 动画时间 */
+    --transition-duration: 0.3s;
+    --effect-duration: 2s;
+    --flow-duration: 4s;
+    --wave-duration: 6s;
+    --switch-duration: 1s;
+}
+
+body {
+    font-family: var(--font-main);
+    line-height: var(--line-height-lyrics);
+    color: var(--text-color);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+main {
+    flex: 1;
+    padding-bottom: 4rem; /* 为页脚预留空间 */
+}
+
+/* 歌词容器样式 */
+.lyrics-container {
+    display: flex;
+    gap: var(--gap-lyrics);
+    margin-top: 2rem;
+}
+
+.lyrics-content {
+    flex: 1;
+    min-width: 0;
+}
+
+/* 歌词行样式 */
+.lyric-line {
+    margin: var(--gap-lines) 0;
+    /* transition: all var(--transition-duration) ease; */
+    transition: color var(--transition-duration) ease, opacity var(--transition-duration) ease;
+    display: flex;
+    gap: var(--gap-lyrics);
+    align-items: baseline;
+}
+
+/* 布局样式 */
+.layout-center-align {
+    justify-content: center;
+    gap: var(--gap-lyrics);
+}
+
+.layout-sides-align {
+    justify-content: space-between;
+}
+
+.layout-center-each {
+    justify-content: space-between;
+}
+
+.layout-center-each .original-text,
+.layout-center-each .translation {
+    text-align: center;
+}
+
+.layout-left-right .original-text {
+    text-align: left;
+}
+
+.layout-left-right .translation {
+    text-align: right;
+}
+
+.layout-right-left .original-text {
+    text-align: right;
+}
+
+.layout-right-left .translation {
+    text-align: left;
+}
+
+/* 原文容器 */
+.original-text {
+    flex: 1;
+    min-width: 0;
+    font-size: var(--font-size-lyrics);
+    font-family: var(--font-lyrics);
+    transition: all var(--transition-duration) ease;
+}
+
+/* Ruby标签样式 */
+ruby {
+    font-size: inherit;
+}
+
+rb {
+    font-size: inherit;
+}
+
+rt {
+    font-size: var(--font-size-furigana);
+    color: var(--secondary-color);
+    font-family: var(--font-furigana);
+    transition: color var(--transition-duration) ease;
+}
+
+/* 翻译样式 */
+.translation {
+    flex: 1;
+    color: var(--translation-color);
+    font-style: italic;
+    min-width: 0;
+    font-size: var(--font-size-translation);
+    font-family: var(--font-translation);
+    transition: all var(--transition-duration) ease;
+}
+
+/* 高亮和动画效果 */
+.lyric-line--active {
+    color: var(--active-color);
+    font-weight: 600;
+}
+
+.lyric-line--active rt {
+    color: var(--active-color);
+    opacity: 0.8;
+}
+
+/* 字符特效基础类 */
+.char {
+    display: inline-block;
+    position: relative;
+    transition: color var(--transition-duration) ease;
+}
+
+/* 发光效果 */
+.char.glow {
+    text-shadow: 0 0 var(--glow-radius) var(--glow-color);
+    filter: brightness(var(--glow-intensity));
+}
+
+/* 阴影效果 */
+.char.shadow {
+    text-shadow: var(--shadow-x) var(--shadow-y) var(--shadow-blur) var(--shadow-color);
+}
+
+/* 1. 颜色切换效果 - 带过渡 */
+.char-effect-switch {
+    transition: color var(--switch-duration) ease;
+    animation: switchAnimation var(--effect-duration) infinite;
+}
+
+.char-effect-switch.char--active {
+    animation: activeSwitchAnimation var(--effect-duration) infinite;
+}
+
+/* 2. 颜色流动效果 - 持续渐变 */
+.char-effect-flow {
+    animation: flowAnimation var(--flow-duration) infinite;
+}
+
+.char-effect-flow.char--active {
+    animation: activeFlowAnimation var(--flow-duration) infinite;
+}
+
+/* 3. 波浪特效 - 横向滚动 */
+.char-effect-wave {
+    animation: waveAnimation var(--wave-duration) infinite;
+    animation-delay: calc(var(--char-index) * 0.1s);
+}
+
+.char-effect-wave.char--active {
+    animation: activeWaveAnimation var(--wave-duration) infinite;
+    animation-delay: calc(var(--char-index) * 0.1s);
+}
+
+/* 彩虹效果 */
+.char-effect-rainbow {
+    background: linear-gradient(
+        to right,
+        #ff0000, #ff8000, #ffff00, #00ff00, #00ffff, #0000ff, #8000ff
+    );
+    background-size: 700% 100%;
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    animation: rainbowAnimation var(--wave-duration) linear infinite;
+}
+
+.char-effect-rainbow.char--active {
+    background: linear-gradient(
+        to right,
+        #ff3333, #ff9933, #ffff33, #33ff33, #33ffff, #3333ff, #9933ff
+    );
+    background-size: 700% 100%;
+    animation: rainbowAnimation var(--wave-duration) linear infinite;
+}
+
+/* 自定义特效 */
+.char-custom {
+    --custom-effect-type: switch;
+    --custom-duration: var(--effect-duration);
+    --custom-timing: ease;
+    --custom-glow-color: var(--glow-color);
+    --custom-glow-radius: var(--glow-radius);
+    --custom-glow-intensity: var(--glow-intensity);
+    --custom-shadow-color: var(--shadow-color);
+    --custom-shadow-x: var(--shadow-x);
+    --custom-shadow-y: var(--shadow-y);
+    --custom-shadow-blur: var(--shadow-blur);
+}
+
+/* 动画关键帧 */
+@keyframes switchAnimation {
+    0%, 100% { color: var(--effect-normal-1); }
+    33.3% { color: var(--effect-normal-2); }
+    66.6% { color: var(--effect-normal-3); }
+}
+
+@keyframes activeSwitchAnimation {
+    0%, 100% { color: var(--effect-active-1); }
+    33.3% { color: var(--effect-active-2); }
+    66.6% { color: var(--effect-active-3); }
+}
+
+@keyframes flowAnimation {
+    0% { color: var(--effect-normal-1); }
+    50% { color: var(--effect-normal-2); }
+    100% { color: var(--effect-normal-3); }
+}
+
+@keyframes activeFlowAnimation {
+    0% { color: var(--effect-active-1); }
+    50% { color: var(--effect-active-2); }
+    100% { color: var(--effect-active-3); }
+}
+
+@keyframes waveAnimation {
+    0% { color: var(--effect-normal-1); }
+    33% { color: var(--effect-normal-2); }
+    66% { color: var(--effect-normal-3); }
+    100% { color: var(--effect-normal-1); }
+}
+
+@keyframes activeWaveAnimation {
+    0% { color: var(--effect-active-1); }
+    33% { color: var(--effect-active-2); }
+    66% { color: var(--effect-active-3); }
+    100% { color: var(--effect-active-1); }
+}
+
+@keyframes rainbowAnimation {
+    0% { background-position: 0% 50%; }
+    100% { background-position: 100% 50%; }
+}
+
+/* 活动状态的字符 */
+.lyric-line--active .char {
+    color: var(--active-color);
+}
+
+.lyric-line--active .char-custom {
+    color: var(--custom-active-color, var(--active-color));
+}
+
+.lyric-line--active .char-effect {
+    animation: activeCharAnimation var(--effect-duration) infinite;
+}
+
+.lyric-line--active .char-custom.char-effect {
+    animation: customActiveCharAnimation var(--effect-duration) infinite;
+}
+
+@keyframes activeCharAnimation {
+    0% { color: var(--active-color); }
+    33% { color: var(--effect-color-1); }
+    66% { color: var(--effect-color-2); }
+    100% { color: var(--effect-color-3); }
+}
+
+@keyframes customActiveCharAnimation {
+    0% { color: var(--custom-active-color); }
+    33% { color: var(--custom-effect-color-1); }
+    66% { color: var(--custom-effect-color-2); }
+    100% { color: var(--custom-effect-color-3); }
+}
+
+/* 隐藏注音时的样式 */
+.hide-furigana rt {
+    display: none;
+}
+
+/* 隐藏翻译时的样式 */
+.hide-translation .translation {
+    display: none;
+}
+
+.hide-translation .lyric-line {
+    justify-content: center;
+}
+
+.hide-translation .original-text {
+    text-align: center;
+}
+
+/* 响应式布局 */
+@media (max-width: 768px) {
+    .lyric-line {
+        flex-direction: column;
+        gap: 0.5rem;
+        align-items: flex-start;
+    }
+
+    .original-text {
+        text-align: left;
+        width: 100%;
+    }
+
+    .translation {
+        padding-left: 1rem;
+        margin-bottom: 0.5rem;
+        border-left: 2px solid var(--secondary-color);
+        opacity: 0.8;
+    }
+}
+
+/* 搜索结果样式 */
+.search-result {
+    padding: 1rem;
+    border-radius: 0.75rem;
+    background-color: white;
+    margin-bottom: 0.75rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.search-result:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    border-color: rgba(0, 0, 0, 0.1);
+}
+
+.search-result .song-title {
+    font-size: 1.125rem;
+    font-weight: 600;
+    color: var(--text-color);
+    margin-bottom: 0.25rem;
+}
+
+.search-result .song-artist {
+    color: var(--translation-color);
+    font-size: 0.875rem;
+    margin-bottom: 0.5rem;
+}
+
+.search-result .metadata-row {
+    color: var(--translation-color);
+    font-size: 0.875rem;
+    margin-top: 0.5rem;
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+}
+
+.search-result .tag {
+    display: inline-block;
+    padding: 0.25rem 0.75rem;
+    background-color: var(--background-color);
+    color: var(--text-color);
+    border-radius: 9999px;
+    font-size: 0.75rem;
+    transition: all 0.2s ease;
+}
+
+.search-result .tag:hover {
+    background-color: var(--primary-color);
+    color: white;
+}
+
+.search-result .description {
+    margin-top: 0.75rem;
+    color: var(--translation-color);
+    font-size: 0.875rem;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* 加载指示器样式 */
+.loading-indicator {
+    width: 100%;
+    padding: 2rem;
+    background-color: white;
+    border-radius: 0.75rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    margin-bottom: 1rem;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.loading-indicator svg {
+    animation: spin 1s linear infinite;
+    color: var(--loading-color);
+}
+
+.loading-indicator.error {
+    border: 1px solid rgba(229, 62, 62, 0.1);
+    background-color: rgba(229, 62, 62, 0.05);
+} 

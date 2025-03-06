@@ -1,0 +1,28 @@
+{
+    "lyrics_format": "lrc",
+    "style": {
+        "fonts": {
+            "default": "Noto Sans SC"
+        },
+        "colors": {
+            "base": "#333",
+            "active": "#2ecc71"
+        },
+        "effects": {
+            "charByChar": true,
+            "defaultEffect": {
+                "type": "flow",
+                "duration": "3s",
+                "timing": "ease-in-out",
+                "normalColors": ["#95a5a6", "#27ae60", "#3498db"],
+                "activeColors": ["#2ecc71", "#1abc9c", "#16a085"],
+                "glow": {
+                    "enabled": true,
+                    "color": "rgba(46, 204, 113, 0.4)",
+                    "radius": "8px",
+                    "intensity": 1.1
+                }
+            }
+        }
+    }
+} 

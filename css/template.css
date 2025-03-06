@@ -1,0 +1,36 @@
+/* 自定义模板样式 */
+.lyric-line {
+    font-family: var(--font-default, 'Noto Sans JP');
+    color: var(--color-base, #333);
+}
+
+.lyric-line--active {
+    font-family: var(--font-highlight, 'Roboto');
+    color: var(--color-active, #e74c3c);
+}
+
+.lyric-line--highlight {
+    color: var(--color-highlight, #2ecc71);
+}
+
+/* 字级样式 */
+.lyric-char {
+    display: inline-block;
+    transition: color 0.1s ease;
+}
+
+.lyric-char--active {
+    color: var(--color-active, #e74c3c);
+}
+
+/* 翻译样式 */
+.translation {
+    color: var(--color-translation, #666);
+    font-style: italic;
+}
+
+/* 假名注音样式 */
+.furigana {
+    font-family: var(--font-furigana, 'Noto Sans JP');
+    color: var(--color-furigana, #666);
+} 

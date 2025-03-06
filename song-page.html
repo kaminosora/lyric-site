@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>歌词页面</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/template.css">
+    <link href="https://cdn.bootcdn.net/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-100">
+    <nav class="bg-white shadow-md fixed w-full top-0 z-50">
+        <div class="container mx-auto px-4 py-2 flex items-center justify-between">
+            <a href="index.html" class="text-gray-600 hover:text-gray-900">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"/>
+                </svg>
+            </a>
+            <input type="text" 
+                   class="w-1/2 px-4 py-1 rounded-lg border focus:outline-none focus:border-blue-500" 
+                   placeholder="搜索歌曲...">
+        </div>
+    </nav>
+
+    <main class="container mx-auto px-4 mt-20">
+        <div class="song-info mb-8">
+            <h1 id="songTitle" class="text-3xl font-bold mb-2"></h1>
+            <div id="songArtist" class="text-xl text-gray-600 mb-4"></div>
+            
+            <!-- 元数据信息 -->
+            <div id="songMetadata" class="bg-white rounded-lg p-4 shadow-sm">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div class="metadata-group">
+                        <div id="albumInfo" class="mb-2 hidden">
+                            <span class="text-gray-500">专辑：</span>
+                            <span class="metadata-album"></span>
+                        </div>
+                        <div id="releaseInfo" class="mb-2 hidden">
+                            <span class="text-gray-500">发行日期：</span>
+                            <span class="metadata-release-date"></span>
+                        </div>
+                        <div id="durationInfo" class="mb-2 hidden">
+                            <span class="text-gray-500">时长：</span>
+                            <span class="metadata-duration"></span>
+                        </div>
+                    </div>
+                    <div class="metadata-group">
+                        <div id="creditsInfo" class="mb-2 hidden">
+                            <div class="metadata-lyricist hidden">
+                                <span class="text-gray-500">作词：</span>
+                                <span></span>
+                            </div>
+                            <div class="metadata-composer hidden">
+                                <span class="text-gray-500">作曲：</span>
+                                <span></span>
+                            </div>
+                            <div class="metadata-arranger hidden">
+                                <span class="text-gray-500">编曲：</span>
+                                <span></span>
+                            </div>
+                        </div>
+                        <div id="labelInfo" class="mb-2 hidden">
+                            <span class="text-gray-500">唱片公司：</span>
+                            <span class="metadata-label"></span>
+                        </div>
+                    </div>
+                </div>
+                <div id="genreInfo" class="mt-2 hidden">
+                    <span class="text-gray-500">流派：</span>
+                    <span class="metadata-genre"></span>
+                </div>
+                <div id="tagsInfo" class="mt-2 hidden">
+                    <div class="flex flex-wrap gap-2">
+                        <!-- 标签将在这里动态添加 -->
+                    </div>
+                </div>
+                <div id="descriptionInfo" class="mt-4 hidden">
+                    <p class="text-gray-600 metadata-description"></p>
+                </div>
+            </div>
+        </div>
+
+        <div class="controls mb-4 flex gap-4">
+            <button id="toggleTranslation" class="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600">
+                关闭翻译
+            </button>
+            <button id="toggleFurigana" class="px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600 hidden">
+                关闭假名注音
+            </button>
+            <button id="togglePlay" class="px-4 py-2 bg-purple-500 text-white rounded hover:bg-purple-600 hidden">
+                播放
+            </button>
+            <button id="restart" class="px-4 py-2 bg-yellow-500 text-white rounded hover:bg-yellow-600 hidden">
+                重播
+            </button>
+            <button id="toggleLayout" class="px-4 py-2 bg-gray-500 text-white rounded hover:bg-gray-600 flex items-center gap-2">
+                <svg class="w-6 h-6" viewBox="0 0 24 24">
+                    <g id="layout-center-align" class="current-layout">
+                        <rect x="2" y="6" width="8" height="12" fill="none" stroke="currentColor" stroke-width="2"/>
+                        <rect x="14" y="6" width="8" height="12" fill="none" stroke="currentColor" stroke-width="2"/>
+                        <line x1="6" y1="12" x2="6" y2="12" stroke="currentColor" stroke-width="4" stroke-linecap="round"/>
+                        <line x1="18" y1="12" x2="18" y2="12" stroke="currentColor" stroke-width="4" stroke-linecap="round"/>
+                    </g>
+                    <g id="layout-sides-align" class="hidden">
+                        <rect x="2" y="6" width="8" height="12" fill="none" stroke="currentColor" stroke-width="2"/>
+                        <rect x="14" y="6" width="8" height="12" fill="none" stroke="currentColor" stroke-width="2"/>
+                        <line x1="4" y1="12" x2="4" y2="12" stroke="currentColor" stroke-width="4" stroke-linecap="round"/>
+                        <line x1="20" y1="12" x2="20" y2="12" stroke="currentColor" stroke-width="4" stroke-linecap="round"/>
+                    </g>
+                    <g id="layout-center-each" class="hidden">
+                        <rect x="2" y="6" width="8" height="12" fill="none" stroke="currentColor" stroke-width="2"/>
+                        <rect x="14" y="6" width="8" height="12" fill="none" stroke="currentColor" stroke-width="2"/>
+                        <line x1="6" y1="12" x2="6" y2="12" stroke="currentColor" stroke-width="4" stroke-linecap="round"/>
+                        <line x1="18" y1="12" x2="18" y2="12" stroke="currentColor" stroke-width="4" stroke-linecap="round"/>
+                    </g>
+                    <g id="layout-left-right" class="hidden">
+                        <rect x="2" y="6" width="8" height="12" fill="none" stroke="currentColor" stroke-width="2"/>
+                        <rect x="14" y="6" width="8" height="12" fill="none" stroke="currentColor" stroke-width="2"/>
+                        <line x1="4" y1="12" x2="4" y2="12" stroke="currentColor" stroke-width="4" stroke-linecap="round"/>
+                        <line x1="20" y1="12" x2="20" y2="12" stroke="currentColor" stroke-width="4" stroke-linecap="round"/>
+                    </g>
+                    <g id="layout-right-left" class="hidden">
+                        <rect x="2" y="6" width="8" height="12" fill="none" stroke="currentColor" stroke-width="2"/>
+                        <rect x="14" y="6" width="8" height="12" fill="none" stroke="currentColor" stroke-width="2"/>
+                        <line x1="8" y1="12" x2="8" y2="12" stroke="currentColor" stroke-width="4" stroke-linecap="round"/>
+                        <line x1="16" y1="12" x2="16" y2="12" stroke="currentColor" stroke-width="4" stroke-linecap="round"/>
+                    </g>
+                </svg>
+                <span>布局</span>
+            </button>
+        </div>
+
+        <div class="lyrics-container">
+            <div id="lyricsContent" class="lyrics-content"></div>
+        </div>
+    </main>
+
+    <footer class="mt-auto">
+        <!-- 页脚内容将在未来添加 -->
+    </footer>
+
+    <script src="js/parser.js"></script>
+    <script src="js/player.js"></script>
+</body>
+</html> 

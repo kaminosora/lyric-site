@@ -1,0 +1,22 @@
+{
+    "lyrics_format": "json",
+    "style": {
+        "fonts": {
+            "default": "Noto Sans JP",
+            "highlight": "Roboto"
+        },
+        "colors": {
+            "base": "#333",
+            "active": "#e74c3c",
+            "highlight": "#2ecc71"
+        },
+        "effects": {
+            "charByChar": true,
+            "defaultEffect": {
+                "type": "rainbow",
+                "duration": "6s",
+                "timing": "linear"
+            }
+        }
+    }
+} 

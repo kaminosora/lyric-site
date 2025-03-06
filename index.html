@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>歌词展示网站</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link href="https://cdn.bootcdn.net/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-100">
+    <div class="container mx-auto px-4">
+        <header class="text-center py-12">
+            <h1 class="text-4xl font-bold mb-4">歌词展示网站</h1>
+            <div class="search-container">
+                <input type="text" 
+                       id="searchInput" 
+                       class="w-full max-w-xl px-4 py-2 rounded-lg border focus:outline-none focus:border-blue-500" 
+                       placeholder="搜索歌曲...">
+                <div id="searchResults" class="mt-4 max-w-xl mx-auto"></div>
+            </div>
+        </header>
+    </div>
+
+    <!-- 添加调试信息区域 -->
+    <div id="debug" class="container mx-auto px-4 mt-8 text-sm text-gray-600"></div>
+
+    <script src="https://cdn.bootcdn.net/ajax/libs/fuse.js/6.4.6/fuse.min.js"></script>
+    <script>
+        // 添加调试函数
+        function debug(message) {
+            const debugDiv = document.getElementById('debug');
+            debugDiv.innerHTML += `<div>${new Date().toLocaleTimeString()}: ${message}</div>`;
+        }
+
+        // 监听全局错误
+        window.onerror = function(msg, url, line, col, error) {
+            debug(`错误: ${msg} (${url}:${line}:${col})`);
+            return false;
+        };
+
+        // 监听未处理的Promise错误
+        window.addEventListener('unhandledrejection', function(event) {
+            debug(`Promise错误: ${event.reason}`);
+        });
+    </script>
+    <script src="js/main.js"></script>
+</body>
+</html> 
