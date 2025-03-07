@@ -5,6 +5,7 @@ class LyricPlayer {
         this.isPlaying = false;
         this.startTime = 0;
         this.animationFrame = null;
+        this.songDuration = 0;
         this.currentLayout = 'center-align';
         this.layouts = ['center-align', 'sides-align', 'center-each', 'left-right', 'right-left'];
         this.charEffects = new Map(); // 存储字符特效配置
@@ -67,6 +68,15 @@ class LyricPlayer {
             if (this.lyrics.some(lyric => lyric.time !== undefined)) {
                 this.togglePlayBtn.classList.remove('hidden');
                 this.restartBtn.classList.remove('hidden');
+                if (metadata.duration) {
+                    const parts = metadata.duration.split(':');
+                    this.songDuration = (parseInt(parts[0],10) * 60 + parseInt(parts[1],10)) * 1000;
+                } else {
+                    this.songDuration = this.lyrics[this.lyrics.length - 1].time + 3000;
+                }
+            } else {
+                this.togglePlayBtn.classList.add('hidden');
+                this.restartBtn.classList.add('hidden');
             }
 
             // 加载翻译（如果存在）
@@ -76,8 +86,10 @@ class LyricPlayer {
                 this.lyrics.forEach((lyric, index) => {
                     lyric.translation = translations[index];
                 });
+                this.toggleTranslationBtn.classList.remove('hidden');
             } catch (error) {
                 console.log('No translation available');
+                this.toggleTranslationBtn.classList.add('hidden');
             }
 
             this.setupEventListeners();
@@ -499,10 +511,17 @@ class LyricPlayer {
             });
         }
 
+        // 播放完重置状态
+        if (currentTime >= this.songDuration+1000) {
+            this.pause();
+            this.restart();
+        }
+        
         if (this.isPlaying) {
             this.animationFrame = requestAnimationFrame(() => this.animate());
         }
     }
+    
 
     // 添加显示元数据的方法
     displayMetadata(metadata) {
